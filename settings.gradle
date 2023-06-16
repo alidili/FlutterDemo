@@ -6,11 +6,23 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         google()
         mavenCentral()
+        maven {
+            allowInsecureProtocol = true
+            url "http://download.flutter.io"
+        }
     }
 }
 rootProject.name = "FlutterDemo"
 include ':app'
+
+// Flutter配置
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+        settingsDir,
+        'flutter_lib/.android/include_flutter.groovy'
+))
+include ':flutter_lib'
